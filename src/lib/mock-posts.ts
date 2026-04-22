@@ -1,5 +1,7 @@
 import type { TaskKey } from "./site-config";
 import type { SitePost } from "./site-connector";
+import { getDemoListingPosts } from "./demo-listings";
+import { getDemoArticlePosts } from "./demo-articles";
 
 const taskSeeds: Record<TaskKey, string> = {
   listing: "listing",
@@ -88,29 +90,39 @@ const taskTitles: Record<TaskKey, string[]> = {
 };
 
 const taskCategories: Record<TaskKey, string[]> = {
-  listing: ["Marketing", "Tech", "Design", "Fitness", "Automotive"],
-  classified: ["Jobs", "Real Estate", "Services", "Gigs", "Market"],
-  article: ["Strategy", "SEO", "Product", "Growth", "Ops"],
-  image: ["Lifestyle", "Travel", "Studio", "Urban", "Minimal"],
-  profile: ["Founder", "Creator", "Agency", "Team", "Consultant"],
-  social: ["Community", "News", "Updates", "Events", "Insights"],
-  pdf: ["Guides", "Playbooks", "Templates", "Reports", "Docs"],
-  org: ["Agency", "Studio", "Collective", "Partner", "Network"],
-  sbm: ["Bookmarks", "Tools", "Resources", "SEO", "Research"],
-  comment: ["Opinion", "Reply", "Discussion", "Feedback", "Debate"],
+  listing: ["business", "technology", "service", "health", "automotive"],
+  classified: ["jobs-payroll", "real-estate", "service", "shopping", "travel"],
+  article: ["business", "digital", "blog", "news", "education"],
+  image: ["lifestyle", "travel", "photography", "arts", "fashion"],
+  profile: ["business", "service", "digital", "education", "health"],
+  social: ["news", "social-media", "event", "entertainment", "business"],
+  pdf: ["education", "business", "finance", "technology", "service"],
+  org: ["business", "industry-manufacturing", "service", "digital", "education"],
+  sbm: ["digital", "technology", "business", "education", "news"],
+  comment: ["blog", "news", "business", "digital", "education"],
 };
 
 const summaryByTask: Record<TaskKey, string> = {
-  listing: "Verified business listing with trusted details.",
-  classified: "Fresh deal posted by a verified seller.",
-  article: "Long-form insight from industry experts.",
-  image: "Curated visual story and gallery.",
-  profile: "Featured creator profile and highlights.",
-  social: "Community update and engagement thread.",
-  pdf: "Downloadable resource for your team.",
-  org: "Organization spotlight and services.",
-  sbm: "Curated bookmark collection entry.",
-  comment: "Response post with perspective and context.",
+  listing:
+    "Directory profile with category, geography, and contact details written for buyers who compare several vendors in one sitting.",
+  classified:
+    "Time-bound notice—role, rental, equipment, or local offer—with the essentials repeated in the first lines so scanners do not miss constraints.",
+  article:
+    "Editorial note or guide: context for procurement, marketing, or operations teams that already narrowed a shortlist of listings.",
+  image:
+    "Visual-first post: interiors, products, or campaign photography meant to sit beside a listing when imagery carries the story.",
+  profile:
+    "Identity surface for a founder, lead, or brand account so visitors know who responds after the first enquiry.",
+  social:
+    "Short operational update—hours change, new branch, hiring window—meant to complement longer listings and articles.",
+  pdf:
+    "Downloadable menu, rate card, policy, or technical appendix visitors can keep alongside the live listing.",
+  org:
+    "Organisation overview when several listings roll up to one legal entity and shared contact policy.",
+  sbm:
+    "Saved external reference—regulator page, tender document, or tool link—with a short note on why the team keeps returning to it.",
+  comment:
+    "Threaded response attached to an article so discussion stays next to the argument it addresses.",
 };
 
 const randomFrom = (items: string[], index: number) =>
@@ -120,6 +132,12 @@ const buildImage = (task: TaskKey, index: number) =>
   `https://picsum.photos/seed/${taskSeeds[task]}-${index}/1200/800`;
 
 export const getMockPostsForTask = (task: TaskKey): SitePost[] => {
+  if (task === "listing") {
+    return getDemoListingPosts();
+  }
+  if (task === "article") {
+    return getDemoArticlePosts();
+  }
   return Array.from({ length: 5 }).map((_, index) => {
     const title = taskTitles[task][index];
     const category = randomFrom(taskCategories[task], index);
@@ -138,7 +156,6 @@ export const getMockPostsForTask = (task: TaskKey): SitePost[] => {
         category,
         location: "Delhi",
         description: summaryByTask[task],
-        website: "https://example.com",
         phone: "+91-9999999999",
       },
       media: [{ url: buildImage(task, index), type: "IMAGE" }],

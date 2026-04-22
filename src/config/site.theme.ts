@@ -4,12 +4,12 @@ export const SITE_THEME = defineSiteTheme({
   shell: 'directory',
   hero: {
     variant: 'search-first',
-    eyebrow: 'Business discovery system',
+    eyebrow: 'Verified directory',
   },
   home: {
     layout: 'directory-stack',
     primaryTask: 'listing',
-    featuredTaskKeys: ['listing', 'profile', 'classified'],
+    featuredTaskKeys: ['listing', 'article'],
   },
   navigation: {
     variant: 'compact',

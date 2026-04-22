@@ -2,6 +2,8 @@ import { SITE_CONFIG, type TaskKey } from "./site-config";
 import { fetchSiteFeed, type SiteFeed, type SitePost } from "./site-connector";
 import { getMockPostsForTask } from "./mock-posts";
 import { isValidCategory } from "./categories";
+import { getDemoListingPosts } from "./demo-listings";
+import { getDemoArticlePosts } from "./demo-articles";
 
 const getTaskContentType = (task: TaskKey) =>
   SITE_CONFIG.tasks.find((item) => item.key === task)?.contentType || task;
@@ -16,6 +18,35 @@ const getPostType = (post: SitePost) => {
   }
   return "";
 };
+
+const DEMO_PAD_TASKS: TaskKey[] = ["listing", "article"];
+
+function padTaskFeed(task: TaskKey, posts: SitePost[], limit: number): SitePost[] {
+  if (!DEMO_PAD_TASKS.includes(task) || posts.length >= limit) {
+    return posts.slice(0, limit);
+  }
+  const filler = task === "listing" ? getDemoListingPosts() : getDemoArticlePosts();
+  const seen = new Set(posts.map((p) => p.slug));
+  const out = [...posts];
+  for (const p of filler) {
+    if (out.length >= limit) break;
+    if (!seen.has(p.slug)) {
+      out.push(p);
+      seen.add(p.slug);
+    }
+  }
+  return out.slice(0, limit);
+}
+
+function findDemoPostBySlug(task: TaskKey, slug: string): SitePost | null {
+  if (task === "listing") {
+    return getDemoListingPosts().find((p) => p.slug === slug) || null;
+  }
+  if (task === "article") {
+    return getDemoArticlePosts().find((p) => p.slug === slug) || null;
+  }
+  return null;
+}
 
 export const getPostTaskKey = (post: SitePost): TaskKey | null => {
   const postType = getPostType(post);
@@ -52,15 +83,20 @@ export const fetchTaskPosts = async (
   try {
     const cachedFeed = await fetchSiteFeed(limit * 6, { fresh: options?.fresh });
     const cachedPosts = pickTaskPosts(cachedFeed);
-    if (cachedPosts.length) return cachedPosts;
+    if (cachedPosts.length) return padTaskFeed(task, cachedPosts, limit);
 
     const freshFeed = await fetchSiteFeed(limit * 6, { fresh: true });
     const filtered = pickTaskPosts(freshFeed);
-    return filtered.length || !allowMockFallback
-      ? filtered
-      : getMockPostsForTask(task).slice(0, limit);
+    const base =
+      filtered.length > 0
+        ? filtered
+        : allowMockFallback
+          ? getMockPostsForTask(task).slice(0, limit)
+          : [];
+    return padTaskFeed(task, base, limit);
   } catch {
-    return allowMockFallback ? getMockPostsForTask(task).slice(0, limit) : [];
+    const base = allowMockFallback ? getMockPostsForTask(task).slice(0, limit) : [];
+    return padTaskFeed(task, base, limit);
   }
 };
 
@@ -81,6 +117,9 @@ export const fetchTaskPostBySlug = async (task: TaskKey, slug: string) => {
   } catch {
     // fall through to mock data
   }
+
+  const demoMatch = findDemoPostBySlug(task, slug);
+  if (demoMatch) return demoMatch;
 
   return allowMockFallback
     ? getMockPostsForTask(task).find((post) => post.slug === slug) || null

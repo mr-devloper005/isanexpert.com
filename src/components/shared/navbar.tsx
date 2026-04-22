@@ -10,6 +10,7 @@ import { useAuth } from '@/lib/auth-context'
 import { SITE_CONFIG, type TaskKey } from '@/lib/site-config'
 import { cn } from '@/lib/utils'
 import { siteContent } from '@/config/site.content'
+import { SITE_THEME } from '@/config/site.theme'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { NAVBAR_OVERRIDE_ENABLED, NavbarOverride } from '@/overrides/navbar'
 
@@ -68,22 +69,22 @@ const variantClasses = {
 
 const directoryPalette = {
   'directory-clean': {
-    shell: 'border-b border-slate-200 bg-white/94 text-slate-950 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-slate-50',
-    nav: 'text-slate-600 hover:text-slate-950',
-    search: 'border border-slate-200 bg-slate-50 text-slate-600',
-    cta: 'bg-slate-950 text-white hover:bg-slate-800',
-    post: 'border border-slate-200 bg-white text-slate-950 hover:bg-slate-50',
-    mobile: 'border-t border-slate-200 bg-white',
+    shell: 'border-b border-[#124170]/10 bg-[#f6fffb]/92 text-[#124170] shadow-[0_1px_0_rgba(18,65,112,0.05)] backdrop-blur-xl',
+    logo: 'rounded-2xl border border-[#67C090]/25 bg-white shadow-sm',
+    nav: 'text-[#215B63] hover:text-[#124170]',
+    search: 'border border-[#124170]/12 bg-white/90 text-[#215B63]',
+    cta: 'bg-[#124170] text-white hover:bg-[#0f3558]',
+    post: 'border border-[#124170]/10 bg-white text-[#124170] hover:bg-[#e9fff3]',
+    mobile: 'border-t border-[#124170]/10 bg-[#f6fffb]',
   },
   'market-utility': {
-    shell: 'border-b border-[#d7deca] bg-[#f4f6ef]/96 text-[#1f2617] shadow-[0_1px_0_rgba(64,76,34,0.06)] backdrop-blur-xl',
-    logo: 'rounded-xl border border-[#d7deca] bg-white',
-    nav: 'text-[#56604b] hover:text-[#1f2617]',
-    search: 'border border-[#d7deca] bg-white text-[#56604b]',
-    cta: 'bg-[#1f2617] text-[#edf5dc] hover:bg-[#2f3a24]',
-    post: 'border border-[#d7deca] bg-white text-[#1f2617] hover:bg-[#eef2e4]',
-    mobile: 'border-t border-[#d7deca] bg-[#f4f6ef]',
+    shell: 'border-b border-[#124170]/10 bg-[#f6fffb]/95 text-[#124170] shadow-[0_1px_0_rgba(18,65,112,0.05)] backdrop-blur-xl',
+    logo: 'rounded-xl border border-[#67C090]/25 bg-white',
+    nav: 'text-[#215B63] hover:text-[#124170]',
+    search: 'border border-[#124170]/12 bg-white/95 text-[#215B63]',
+    cta: 'bg-[#124170] text-white hover:bg-[#0f3558]',
+    post: 'border border-[#124170]/10 bg-white text-[#124170] hover:bg-[#e9fff3]',
+    mobile: 'border-t border-[#124170]/10 bg-[#f6fffb]',
   },
 } as const
 
@@ -107,28 +108,50 @@ export function Navbar() {
   const primaryTask = SITE_CONFIG.tasks.find((task) => task.key === recipe.primaryTask && task.enabled) || primaryNavigation[0]
   const isDirectoryProduct = recipe.homeLayout === 'listing-home' || recipe.homeLayout === 'classified-home'
 
+  const directoryNav = useMemo(() => {
+    const enabled = SITE_CONFIG.tasks.filter((task) => task.enabled && task.key !== 'profile')
+    const order = [recipe.primaryTask, ...SITE_THEME.home.featuredTaskKeys.filter((key) => key !== recipe.primaryTask)]
+    const seen = new Set<string>()
+    const emphasized: typeof enabled = []
+    for (const key of order) {
+      const match = enabled.find((task) => task.key === key)
+      if (match && !seen.has(match.key)) {
+        seen.add(match.key)
+        emphasized.push(match)
+      }
+    }
+    const overflow = enabled.filter((task) => !seen.has(task.key))
+    return { emphasized: emphasized.slice(0, 3), overflow }
+  }, [recipe.primaryTask])
+
   if (isDirectoryProduct) {
     const palette = directoryPalette[(recipe.brandPack === 'market-utility' ? 'market-utility' : 'directory-clean') as keyof typeof directoryPalette]
 
     return (
       <header className={cn('sticky top-0 z-50 w-full', palette.shell)}>
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <div className="flex min-w-0 items-center gap-4">
+        <nav className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6 lg:px-8">
+          <div className="flex min-w-0 flex-1 items-center gap-3 lg:gap-6">
             <Link href="/" className="flex shrink-0 items-center gap-3">
-              <div className={cn('flex h-12 w-12 items-center justify-center overflow-hidden p-1.5', palette.logo)}>
-                <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+              <div className={cn('flex h-11 w-11 items-center justify-center overflow-hidden p-1.5 sm:h-12 sm:w-12', palette.logo)}>
+                <img src="/favicon.png?v=20260422" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
               </div>
               <div className="min-w-0 hidden sm:block">
-                <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
-                <span className="block text-[10px] uppercase tracking-[0.24em] opacity-60">{siteContent.navbar.tagline}</span>
+                <span className="block truncate font-[family-name:var(--font-display)] text-lg font-semibold tracking-[-0.02em]">{SITE_CONFIG.name}</span>
               </div>
             </Link>
 
-            <div className="hidden items-center gap-5 xl:flex">
-              {primaryNavigation.slice(0, 4).map((task) => {
+            <div className="hidden flex-1 items-center justify-center gap-2 lg:flex">
+              {directoryNav.emphasized.map((task) => {
                 const isActive = pathname.startsWith(task.route)
                 return (
-                  <Link key={task.key} href={task.route} className={cn('text-sm font-semibold transition-colors', isActive ? 'text-foreground' : palette.nav)}>
+                  <Link
+                    key={task.key}
+                    href={task.route}
+                    className={cn(
+                      'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
+                      isActive ? 'bg-[#124170] text-white shadow-sm' : palette.nav,
+                    )}
+                  >
                     {task.label}
                   </Link>
                 )
@@ -136,42 +159,35 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className={cn('flex w-full max-w-xl items-center gap-3 rounded-full px-4 py-3', palette.search)}>
-              <Search className="h-4 w-4" />
-              <span className="text-sm">Find businesses, spaces, and local services</span>
-              <div className="ml-auto hidden items-center gap-1 text-xs opacity-75 md:flex">
-                <MapPin className="h-3.5 w-3.5" />
-                Local discovery
-              </div>
-            </div>
+          <div className="hidden min-w-0 max-w-md flex-1 items-center justify-center px-2 xl:flex">
+            <Link
+              href="/search"
+              className={cn('flex w-full max-w-lg items-center gap-3 rounded-full px-4 py-2.5 transition hover:border-[#67C090]/45', palette.search)}
+            >
+              <Search className="h-4 w-4 shrink-0 text-[#215B63]" />
+              <span className="truncate text-sm text-[#124170]/70">{siteContent.hero.searchPlaceholder}</span>
+              <MapPin className="ml-auto hidden h-3.5 w-3.5 shrink-0 text-[#67C090] 2xl:block" aria-hidden />
+            </Link>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            {primaryTask ? (
-              <Link href={primaryTask.route} className="hidden items-center gap-2 rounded-full border border-current/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] opacity-75 md:inline-flex">
-                <Sparkles className="h-3.5 w-3.5" />
-                {primaryTask.label}
-              </Link>
-            ) : null}
-
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             {isAuthenticated ? (
               <NavbarAuthControls />
             ) : (
-              <div className="hidden items-center gap-2 md:flex">
-                <Button variant="ghost" size="sm" asChild className="rounded-full px-4">
-                  <Link href="/login">Sign In</Link>
+              <div className="hidden items-center gap-1.5 md:flex">
+                <Button variant="ghost" size="sm" asChild className="rounded-full px-3 text-[#215B63] hover:bg-[#AAFFC7]/20">
+                  <Link href="/login">Sign in</Link>
                 </Button>
-                <Button size="sm" asChild className={cn('rounded-full', palette.cta)}>
-                  <Link href="/register">
+                <Button size="sm" asChild className={cn('rounded-full px-4 shadow-sm', palette.cta)}>
+                  <Link href="/dashboard/listings/new">
                     <Plus className="mr-1 h-4 w-4" />
-                    Add Listing
+                    Create listing
                   </Link>
                 </Button>
               </div>
             )}
 
-            <Button variant="ghost" size="icon" className="rounded-full lg:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <Button variant="ghost" size="icon" className="rounded-full text-[#124170] lg:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -180,19 +196,59 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <div className={palette.mobile}>
             <div className="space-y-2 px-4 py-4">
-              <div className={cn('mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}>
+              <Link
+                href="/search"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={cn('mb-2 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}
+              >
                 <Search className="h-4 w-4" />
-                Find businesses, spaces, and services
-              </div>
-              {mobileNavigation.map((item) => {
-                const isActive = pathname.startsWith(item.href)
+                {siteContent.hero.searchPlaceholder}
+              </Link>
+              {directoryNav.emphasized.map((task) => {
+                const isActive = pathname.startsWith(task.route)
+                const Icon = taskIcons[task.key] || LayoutGrid
                 return (
-                  <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className={cn('flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors', isActive ? 'bg-foreground text-background' : palette.post)}>
-                    <item.icon className="h-5 w-5" />
-                    {item.name}
+                  <Link
+                    key={task.key}
+                    href={task.route}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      'flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors',
+                      isActive ? 'bg-[#124170] text-white' : palette.post,
+                    )}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {task.label}
                   </Link>
                 )
               })}
+              {directoryNav.overflow.length ? (
+                <>
+                  <p className="px-2 pt-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#215B63]/70">More</p>
+                  {directoryNav.overflow.map((task) => {
+                    const Icon = taskIcons[task.key] || LayoutGrid
+                    return (
+                      <Link
+                        key={task.key}
+                        href={task.route}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={cn('flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold', palette.post)}
+                      >
+                        <Icon className="h-5 w-5" />
+                        {task.label}
+                      </Link>
+                    )
+                  })}
+                </>
+              ) : null}
+              <Link
+                href="/dashboard/listings/new"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[#124170] px-4 py-3 text-sm font-semibold text-white"
+              >
+                <Plus className="h-4 w-4" />
+                Create listing
+              </Link>
             </div>
           </div>
         )}
@@ -211,11 +267,10 @@ export function Navbar() {
         <div className="flex min-w-0 flex-1 items-center gap-4 lg:gap-7">
           <Link href="/" className="flex shrink-0 items-center gap-3 whitespace-nowrap pr-2">
             <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden p-1.5', style.logo)}>
-              <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+              <img src="/favicon.png?v=20260422" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 hidden sm:block">
               <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
-              <span className="hidden text-[10px] uppercase tracking-[0.28em] opacity-70 sm:block">{siteContent.navbar.tagline}</span>
             </div>
           </Link>
 
