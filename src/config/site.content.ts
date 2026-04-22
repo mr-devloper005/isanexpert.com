@@ -2,110 +2,126 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent reading platform',
+    tagline: '',
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
+    tagline: '',
   },
   hero: {
-    badge: 'Latest stories and visuals',
-    title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
+    badge: 'Business directory',
+    title: ['Listings visitors can compare in minutes.', 'Context when they want to read longer.'],
     description:
-      'Explore fresh articles, image-led posts, and discoverable content across the platform through a calmer and clearer browsing experience.',
+      'Isanexpert combines a structured business directory with editorial insights. Operators keep categories, locations, and contact paths consistent; readers move from a shortlist of listings into guides and explainers without losing their place.',
     primaryCta: {
-      label: 'Read latest stories',
-      href: '/articles',
+      label: 'Create a listing',
+      href: '/dashboard/listings/new',
     },
     secondaryCta: {
-      label: 'Explore visuals',
-      href: '/images',
+      label: 'Browse directory',
+      href: '/listings',
     },
-    searchPlaceholder: 'Search stories, visuals, listings, and more',
+    searchPlaceholder: 'Search listings',
     focusLabel: 'Focus',
-    featureCardBadge: 'latest cover rotation',
-    featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
+    featureCardBadge: 'Recently updated',
+    featureCardTitle: 'What appears on the home surface',
     featureCardDescription:
-      'Recent images and stories stay at the center of the experience without changing any core platform behavior.',
+      'The homepage highlights fresh listings and supporting content so first-time visitors immediately see how your business presents itself: imagery, headline, category, and geography before they open a full profile.',
   },
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
+      title: 'Isanexpert — business listings and market insights',
       description:
-        'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
+        'Browse verified-style business listings across categories, read practical guides in the insights section, and move from search to contact with fewer dead ends. Built for teams that care how their brand reads online.',
+      openGraphTitle: 'Isanexpert — business listings and market insights',
       openGraphDescription:
-        'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+        'A directory-first experience with editorial support: compare services by location and category, then dig into longer articles when you need procurement notes, compliance reminders, or marketing context.',
+      keywords: [
+        'Isanexpert',
+        'business directory',
+        'company listings',
+        'local services directory',
+        'B2B listings',
+        'market insights',
+        'business guides',
+      ],
     },
-    introBadge: 'About the platform',
-    introTitle: 'Built for reading, browsing, and connecting different kinds of content.',
+    introBadge: 'What we are building',
+    introTitle: 'A directory that respects how people actually decide.',
     introParagraphs: [
-      'This site brings together article-style reading, visual browsing, and structured discovery so visitors can move naturally between different content types.',
-      'Instead of separating stories, visuals, and supporting resources into disconnected surfaces, the platform keeps them connected in one place with consistent navigation and easier exploration.',
-      'Whether someone starts with a story, an image-led post, a listing, or a resource page, they can keep discovering related content without friction.',
+      'Most people do not read a homepage like a brochure. They scan for category, geography, and proof that a business is legitimate, then open one or two listings to compare hours, scope, and contact options.',
+      'Isanexpert keeps that scanning rhythm honest: listings use consistent fields so you are not comparing apples with vague paragraphs. When someone needs more than a card can hold, the insights library carries interviews, checklists, and sector notes written in plain language.',
+      'Whether you run a clinic, a studio, a consultancy, or a regional chain, the goal is the same—publish information once, keep it easy to update, and let visitors trust what they see.',
     ],
-    sideBadge: 'At a glance',
+    sideBadge: 'What visitors notice first',
     sidePoints: [
-      'Reading-first homepage with stronger emphasis on stories and imagery.',
-      'Connected sections for articles, visuals, listings, and supporting resources.',
-      'Cleaner browsing rhythm designed to make exploration feel easier.',
-      'Lightweight interactions that keep the experience fast and readable.',
+      'Readable typography and spacing so dense categories do not feel like a spreadsheet.',
+      'Strong contrast between directory pages and long-form articles so each format does its job.',
+      'Mobile layouts that keep phone numbers, addresses, and primary actions within thumb reach.',
+      'Search and filters that stay predictable as you add more listings over time.',
     ],
     primaryLink: {
-      label: 'Browse articles',
-      href: '/articles',
+      label: 'Open listings',
+      href: '/listings',
     },
     secondaryLink: {
-      label: 'See visuals',
-      href: '/images',
+      label: 'Read insights',
+      href: '/articles',
     },
   },
   cta: {
-    badge: 'Start exploring',
-    title: 'Explore articles, visuals, and resources through one connected experience.',
+    badge: 'For operators',
+    title: 'Publish once, keep every field aligned with how buyers compare you.',
     description:
-      'Move between articles, image-led posts, listings, and resources through one clearer and more connected visual system.',
+      'Use the listing editor to set category, service area, phone, and narrative copy. Visitors see the same structure on every profile, which makes shortlisting faster and reduces repetitive questions before the first conversation.',
     primaryCta: {
-      label: 'Get Started Free',
-      href: '/register',
+      label: 'Start a listing',
+      href: '/dashboard/listings/new',
     },
     secondaryCta: {
-      label: 'Contact Sales',
+      label: 'Contact us',
       href: '/contact',
     },
   },
   taskSectionHeading: 'Latest {label}',
-  taskSectionDescriptionSuffix: 'Browse the newest posts in this section.',
+  taskSectionDescriptionSuffix:
+    'New and updated entries appear here in publish order. Open any item for the full description, media, and contact block.',
 } as const
 
 export const taskPageMetadata: Record<Exclude<TaskKey, 'comment' | 'org' | 'social'>, { title: string; description: string }> = {
   article: {
-    title: 'Articles and stories',
-    description: 'Read articles, stories, guides, and long-form posts across topics and interests.',
+    title: 'Insights',
+    description:
+      'Longer articles on positioning, operations, and digital presence for businesses that list on Isanexpert. Use this section when you want procurement context, marketing notes, or sector trends beyond a single listing card.',
   },
   listing: {
-    title: 'Listings and discoverable pages',
-    description: 'Explore listings, services, brands, and structured pages organized for easier browsing.',
+    title: 'Listings',
+    description:
+      'Search and filter businesses by category and geography. Each listing is built to answer the questions people ask before they call: who you serve, where you work, how to reach you, and what proof you can show.',
   },
   classified: {
-    title: 'Classifieds and announcements',
-    description: 'Browse classifieds, offers, notices, and time-sensitive posts across categories.',
+    title: 'Classifieds',
+    description:
+      'Short notices for roles, equipment, rentals, and time-bound offers. Classifieds sit beside the main directory so urgent posts stay visible without replacing structured business profiles.',
   },
   image: {
-    title: 'Images and visual posts',
-    description: 'Explore image-led posts, galleries, and visual stories from across the platform.',
+    title: 'Gallery',
+    description:
+      'Image-led posts for portfolios, menus, interiors, and campaign photography. Pair galleries with listings when visuals carry as much information as the written summary.',
   },
   profile: {
-    title: 'Profiles and public pages',
-    description: 'Discover public profiles, brand pages, and identity-focused posts in one place.',
+    title: 'Profiles',
+    description:
+      'People and teams behind the listings: founders, practice leads, and brand accounts. Profiles give context when a buyer wants to know who answers the phone.',
   },
   sbm: {
-    title: 'Curated links and saved resources',
-    description: 'Browse useful links, saved references, and curated resources organized for discovery.',
+    title: 'Bookmarks',
+    description:
+      'Saved links and reference collections for research-heavy buyers and internal teams. Organize vendor docs, policy PDFs, and competitor pages alongside your own listings.',
   },
   pdf: {
-    title: 'PDFs and downloadable resources',
-    description: 'Open reports, documents, and downloadable resources shared across the platform.',
+    title: 'Documents',
+    description:
+      'Menus, rate cards, compliance PDFs, and long-form downloads that belong next to a listing. Visitors can grab a file and still return to the directory in one click.',
   },
 }
 
@@ -114,132 +130,124 @@ export const taskIntroCopy: Record<
   { title: string; paragraphs: string[]; links: { label: string; href: string }[] }
 > = {
   listing: {
-    title: 'Listings, services, and structured pages',
+    title: 'Business listings',
     paragraphs: [
-      'Explore listings, services, brands, and discoverable pages across categories. Each entry is organized to make browsing clearer and help visitors quickly understand what a post offers.',
-      'Listings connect naturally with articles, images, resources, and other content types so supporting information stays easy to reach from the same platform.',
-      'Browse by category to compare posts in context, discover related content, and move between formats without losing your place.',
+      'This index is organised so you can move from category to geography without losing context. Each card carries a headline, category label, and location line where the publisher provided one, which makes shortlists easier when you are comparing three or four vendors.',
+      'Open a listing when you need the full narrative: services offered, areas covered, hours, and the contact paths the business prefers. Media and highlights sit with the text so you are not hunting through tabs.',
+      'If you operate multiple branches, keep each location distinct so search results stay honest and customers land on the page that matches their city or neighbourhood.',
     ],
-    links: [
-      { label: 'Read articles', href: '/articles' },
-      { label: 'Explore classifieds', href: '/classifieds' },
-      { label: 'View profiles', href: '/profile' },
-    ],
+    links: [],
   },
   article: {
-    title: 'Articles, stories, and long-form reading',
+    title: 'Insights library',
     paragraphs: [
-      'This section is built for stories, explainers, guides, and long-form reading across topics and interests.',
-      'Articles connect with listings, images, resources, and other content types so deeper reading can lead naturally into related discovery.',
-      'Use this section to browse thoughtful posts, revisit useful writing, and move into supporting content when you want more context.',
+      'Articles here are written for operators and buyers who already found a shortlist of listings and want deeper context: how to read a proposal, what questions to ask on a site visit, or how seasonal demand shifts a category.',
+      'Pieces are tagged by topic so you can follow a thread across weeks instead of rereading the same introduction on every vendor site. When an article references a service type, you can jump back into listings with the same vocabulary.',
+      'Contributors focus on clarity: short sections, concrete examples, and checklists you can reuse in email or procurement notes.',
     ],
-    links: [
-      { label: 'Explore listings', href: '/listings' },
-      { label: 'Open images', href: '/images' },
-      { label: 'Browse resources', href: '/pdf' },
-    ],
+    links: [],
   },
   classified: {
-    title: 'Classifieds, offers, and timely updates',
+    title: 'Classifieds',
     paragraphs: [
-      'Classified posts help surface offers, notices, deals, and time-sensitive opportunities in a faster-scanning format.',
-      'They work well alongside articles, listings, and profiles, making it easier to connect short-term posts with more structured content.',
-      'Browse by category to find announcements quickly, then continue into related sections when you need more detail.',
+      'Classifieds cover time-sensitive posts: roles, equipment, short rentals, and local announcements. They are meant to be read quickly, with a headline and price or date where it matters.',
+      'Because they sit on the same platform as full listings, you can move from a classified notice into a structured business profile when you need more detail on the seller or buyer organisation.',
+      'Use filters to narrow by category, then open individual posts for contact instructions and any attachments the publisher added.',
     ],
     links: [
-      { label: 'Business listings', href: '/listings' },
-      { label: 'Read articles', href: '/articles' },
-      { label: 'View profiles', href: '/profile' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'Profiles', href: '/profile' },
     ],
   },
   image: {
-    title: 'Image-led posts and visual stories',
+    title: 'Visual gallery',
     paragraphs: [
-      'Images take the lead in this section through galleries, visual posts, and story-led content where imagery carries the experience.',
-      'These posts connect with articles, listings, and other sections so visuals can act as entry points into deeper content.',
-      'Browse the latest visual updates, then continue into related stories or supporting pages for more context.',
+      'Some decisions are visual first: interiors, product lines, event spaces, and campaign photography belong in a gallery format where the image carries the headline.',
+      'Galleries are linked from listings and articles when the publisher connects them, so you can move from inspiration to specification without switching sites.',
+      'When you publish, add alt text and captions where you can—they help accessibility and search without changing how the grid behaves.',
     ],
     links: [
-      { label: 'Read articles', href: '/articles' },
-      { label: 'Explore listings', href: '/listings' },
-      { label: 'Open classifieds', href: '/classifieds' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Classifieds', href: '/classifieds' },
     ],
   },
   profile: {
-    title: 'Profiles, identities, and public pages',
+    title: 'Profiles',
     paragraphs: [
-      'Profiles capture the identity behind a business, creator, brand, or project and help visitors understand who is behind the content they are exploring.',
-      'These pages work as trust anchors across the site and connect naturally with stories, listings, documents, and other post types.',
-      'Browse profiles to understand people and brands more clearly, then continue into related content from the same source.',
+      'Profiles identify the people and teams behind listings: founders, clinical leads, studio heads, and brand accounts. They answer the question of who owns the relationship after the first call.',
+      'A strong profile repeats the same name, geography, and service lines you see on listings so visitors do not encounter conflicting stories.',
+      'Use the profile to add biography, credentials, and links to deeper reading; keep contact routing consistent with your main listing so customers always know the best channel.',
     ],
     links: [
-      { label: 'Open listings', href: '/listings' },
-      { label: 'Read articles', href: '/articles' },
-      { label: 'Browse images', href: '/images' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'Images', href: '/images' },
     ],
   },
   sbm: {
-    title: 'Curated links and bookmarked resources',
+    title: 'Bookmarks',
     paragraphs: [
-      'This section collects useful links, references, tools, and saved resources in a text-first browsing format.',
-      'Bookmarks stay connected to the rest of the platform, making it easier to move from a saved link into related stories, listings, or resources.',
-      'Use this section to organize helpful sources and discover connected content without leaving the broader site experience.',
+      'Bookmarks are for material you want to return to: tender documents, regulator pages, competitor sites, and internal playbooks. They are organised as collections so teams can share a shelf instead of a long chat thread.',
+      'Each item keeps its title and note field short so the shelf stays scannable. Link out to PDFs or external tools when the source of truth lives elsewhere.',
+      'Collections can sit next to articles and listings in your workflow—you are not forced into a single content type for every reference.',
     ],
     links: [
-      { label: 'Browse articles', href: '/articles' },
-      { label: 'Explore listings', href: '/listings' },
-      { label: 'Open PDFs', href: '/pdf' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'PDFs', href: '/pdf' },
     ],
   },
   pdf: {
-    title: 'PDFs, documents, and downloadable files',
+    title: 'Document library',
     paragraphs: [
-      'The PDF library hosts reports, guides, downloadable files, and longer-form document resources that support reading and discovery.',
-      'These resources work alongside stories, listings, and profiles, helping document-style content stay connected to the rest of the platform.',
-      'Browse by category to find relevant files quickly, then continue into related sections when you want more context.',
+      'PDFs host menus, rate cards, technical specifications, and compliance packs that are awkward to paste into a listing body. Visitors download once and keep the version that was live on the date of publish.',
+      'Files stay grouped by category so procurement teams can pull the right pack for a sector without searching unrelated folders.',
+      'When a document updates, replace the file and note the revision date in the summary line so repeat buyers know they have the current version.',
     ],
     links: [
-      { label: 'Read articles', href: '/articles' },
-      { label: 'See listings', href: '/listings' },
-      { label: 'Explore profiles', href: '/profile' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Profiles', href: '/profile' },
     ],
   },
   social: {
-    title: 'Short updates and community signals',
+    title: 'Community updates',
     paragraphs: [
-      'Short updates add quick signals that keep activity flowing across the platform.',
-      'They work well with stories, listings, and resources by helping visitors move from brief updates into deeper content.',
-      'Use these posts as lightweight entry points into the broader site experience.',
+      'Short updates highlight launches, office moves, hiring windows, and partnership news. They are meant to complement listings rather than replace them.',
+      'Readers can scan the feed quickly, then follow links into listings or articles when they need the full picture.',
+      'Publishers should keep tone factual and dated where time sensitivity matters so the archive stays trustworthy months later.',
     ],
     links: [
-      { label: 'Open listings', href: '/listings' },
-      { label: 'Read articles', href: '/articles' },
-      { label: 'View PDFs', href: '/pdf' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'PDFs', href: '/pdf' },
     ],
   },
   comment: {
-    title: 'Comments and contextual responses',
+    title: 'Comments',
     paragraphs: [
-      'Comments surface responses connected directly to articles and help keep discussion close to the writing it belongs to.',
-      'This layer adds perspective and reaction without needing a separate standalone content format.',
-      'Use comments as supporting context beneath stories, then continue exploring related content from the same topic area.',
+      'Comments stay attached to articles so discussion remains next to the argument it responds to. Moderation follows the same community standards as the rest of the site.',
+      'Readers can quote a paragraph, ask a follow-up question, or share a counterexample without opening a separate thread elsewhere.',
+      'Authors receive notifications when new comments arrive so answers land while the article is still relevant.',
     ],
     links: [
-      { label: 'Explore articles', href: '/articles' },
-      { label: 'View listings', href: '/listings' },
-      { label: 'See classifieds', href: '/classifieds' },
+      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Classifieds', href: '/classifieds' },
     ],
   },
   org: {
-    title: 'Organizations, teams, and structured entities',
+    title: 'Organisations',
     paragraphs: [
-      'Organization pages provide structured identity surfaces for teams, brands, communities, and agencies.',
-      'Used with listings, stories, profiles, and resources, they help create stronger structure across the platform.',
-      'Connect organization pages with related content to build a clearer and more unified site presence.',
+      'Organisation pages describe companies, collectives, and institutions that may operate several listings under one legal name. They unify branding and contact policy across branches.',
+      'Use this format when the buyer cares about governance: who signs contracts, where invoices go, and which office handles escalations.',
+      'Link organisation pages from listings and profiles so visitors always see the same corporate narrative.',
     ],
     links: [
-      { label: 'Business listings', href: '/listings' },
-      { label: 'Read articles', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
+      { label: 'Insights', href: '/articles' },
       { label: 'PDF library', href: '/pdf' },
     ],
   },
