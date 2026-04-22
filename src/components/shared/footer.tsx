@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { FileText, Building2, LayoutGrid, Tag, Github, Twitter, Linkedin, Image as ImageIcon, User, ArrowRight, Sparkles } from 'lucide-react'
 import { SITE_CONFIG, type TaskKey } from '@/lib/site-config'
 import { siteContent } from '@/config/site.content'
+import { SITE_THEME } from '@/config/site.theme'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { FOOTER_OVERRIDE_ENABLED, FooterOverride } from '@/overrides/footer'
 
@@ -18,24 +19,18 @@ const taskIcons: Record<TaskKey, any> = {
   comment: FileText,
 }
 
+const buildTaskLink = (task: (typeof SITE_CONFIG.tasks)[number]) => ({
+  name: task.label,
+  href: task.route,
+  icon: taskIcons[task.key] || LayoutGrid,
+})
+
 const footerLinks = {
-  platform: SITE_CONFIG.tasks.filter((task) => task.enabled).map((task) => ({
-    name: task.label,
-    href: task.route,
-    icon: taskIcons[task.key] || LayoutGrid,
-  })),
-  company: [
-    { name: 'About', href: '/about' },
-    { name: 'Team', href: '/team' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Press', href: '/press' },
-  ],
+  platform: SITE_CONFIG.tasks.filter((task) => task.enabled).map(buildTaskLink),
+  company: [{ name: 'About', href: '/about' }],
   resources: [
     { name: 'Help Center', href: '/help' },
     { name: 'Community', href: '/community' },
-    { name: 'Developers', href: '/developers' },
-    { name: 'Status', href: '/status' },
   ],
   legal: [
     { name: 'Privacy', href: '/privacy' },
@@ -59,6 +54,10 @@ export function Footer() {
   const { recipe } = getFactoryState()
   const enabledTasks = SITE_CONFIG.tasks.filter((task) => task.enabled)
   const primaryTask = enabledTasks.find((task) => task.key === recipe.primaryTask) || enabledTasks[0]
+  const emphasisOrder = [recipe.primaryTask, ...SITE_THEME.home.featuredTaskKeys.filter((key) => key !== recipe.primaryTask)]
+  const discoverTasks = emphasisOrder
+    .map((key) => SITE_CONFIG.tasks.find((task) => task.key === key))
+    .filter((task): task is NonNullable<typeof task> => Boolean(task))
 
   if (recipe.footer === 'minimal-footer') {
     return (
@@ -88,16 +87,18 @@ export function Footer() {
             <div className="rounded-[2rem] border border-white/10 bg-white/5 p-7">
               <div className="flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/12 bg-white/8 p-1.5">
-                  <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+                  <img src="/favicon.png?v=20260422" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
                 </div>
                 <div>
                   <p className="text-lg font-semibold">{SITE_CONFIG.name}</p>
-                  <p className="text-xs uppercase tracking-[0.24em] text-slate-400">{siteContent.footer.tagline}</p>
+                  {siteContent.footer.tagline ? (
+                    <p className="text-xs uppercase tracking-[0.24em] text-slate-400">{siteContent.footer.tagline}</p>
+                  ) : null}
                 </div>
               </div>
               <p className="mt-5 max-w-md text-sm leading-7 text-slate-300">{SITE_CONFIG.description}</p>
               {primaryTask ? (
-                <Link href={primaryTask.route} className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#8df0c8] px-4 py-2.5 text-sm font-semibold text-[#07111f] hover:bg-[#77dfb8]">
+                <Link href={primaryTask.route} className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#AAFFC7] px-4 py-2.5 text-sm font-semibold text-[#124170] hover:bg-[#8ef0b8]">
                   Explore {primaryTask.label}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -174,33 +175,55 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] text-slate-950">
+    <footer className="border-t border-[#124170]/10 bg-[linear-gradient(180deg,#f6fffb_0%,#ffffff_55%,#eefcf4_100%)] text-[#124170]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr_0.8fr]">
-          <div>
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+          <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <div className="h-11 w-11 overflow-hidden rounded-2xl border border-slate-200 bg-white p-1 shadow-sm">
-                <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="44" height="44" className="h-full w-full object-contain" />
+              <div className="h-11 w-11 overflow-hidden rounded-2xl border border-[#67C090]/30 bg-white p-1 shadow-sm">
+                <img src="/favicon.png?v=20260422" alt={`${SITE_CONFIG.name} logo`} width="44" height="44" className="h-full w-full object-contain" />
               </div>
               <div>
-                <span className="block text-lg font-semibold">{SITE_CONFIG.name}</span>
-                <span className="text-xs uppercase tracking-[0.22em] text-slate-500">{siteContent.footer.tagline}</span>
+                <span className="block font-[family-name:var(--font-display)] text-lg font-semibold tracking-[-0.02em]">{SITE_CONFIG.name}</span>
               </div>
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-7 text-slate-600">{SITE_CONFIG.description}</p>
+            <p className="mt-5 max-w-sm text-sm leading-7 text-[#124170]/78">{SITE_CONFIG.description}</p>
           </div>
-          {(['platform', 'company', 'resources', 'legal'] as const).map((section) => (
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#215B63]/80">Discover</h3>
+            <ul className="mt-5 space-y-3 text-sm text-[#124170]/85">
+              {discoverTasks.map((task) => {
+                const Icon = taskIcons[task.key] || LayoutGrid
+                return (
+                  <li key={task.key}>
+                    <Link href={task.route} className="flex items-center gap-2 font-medium hover:text-[#215B63]">
+                      <Icon className="h-4 w-4 text-[#67C090]" />
+                      {task.label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          {(['company', 'resources', 'legal'] as const).map((section) => (
             <div key={section}>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">{section}</h3>
-              <ul className="mt-5 space-y-3 text-sm text-slate-600">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-[#215B63]/80">{section}</h3>
+              <ul className="mt-5 space-y-3 text-sm text-[#124170]/78">
                 {footerLinks[section].map((item: any) => (
-                  <li key={item.name}><Link href={item.href} className="flex items-center gap-2 hover:text-slate-950">{item.icon ? <item.icon className="h-4 w-4" /> : null}{item.name}</Link></li>
+                  <li key={item.name}>
+                    <Link href={item.href} className="flex items-center gap-2 hover:text-[#124170]">
+                      {item.icon ? <item.icon className="h-4 w-4 text-[#67C090]" /> : null}
+                      {item.name}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-        <div className="mt-12 border-t border-slate-200 pt-6 text-center text-sm text-slate-500">&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.</div>
+        <div className="mt-12 border-t border-[#124170]/10 pt-6 text-center text-sm text-[#124170]/60">
+          &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+        </div>
       </div>
     </footer>
   )

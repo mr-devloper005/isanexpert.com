@@ -755,17 +755,17 @@ export const mockTeamMembers: TeamMember[] = [
   {
     id: 'team-1',
     name: 'Avery Brooks',
-    role: 'Head of Community',
+    role: 'Head of publisher success',
     avatar: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=200&h=200&fit=crop',
-    bio: 'Building programs that connect creators with meaningful collaborations.',
+    bio: 'Works with clinics, agencies, and regional operators on listing structure—what belongs in highlights, how service areas read to buyers, and when to pair a profile with a longer article.',
     location: 'Austin, TX'
   },
   {
     id: 'team-2',
     name: 'Jordan Lee',
-    role: 'Product Lead',
+    role: 'Product lead, directory experience',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop',
-    bio: 'Designing calm, curated experiences for modern teams.',
+    bio: 'Owns search, filters, and the detail page rhythm so every category feels familiar. Spends time on field order, typography, and the gap between marketing copy and the contact block.',
     location: 'San Francisco, CA'
   },
   {
@@ -773,7 +773,7 @@ export const mockTeamMembers: TeamMember[] = [
     name: 'Priya Desai',
     role: 'Engineering',
     avatar: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=200&h=200&fit=crop',
-    bio: 'Focused on reliability, search, and delightful performance.',
+    bio: 'Keeps ingestion, indexing, and image delivery fast enough that editors can refresh listings during campaigns without watching spinners. Cares about stable slugs and clean schema for downstream tools.',
     location: 'New York, NY'
   }
 ]
