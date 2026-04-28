@@ -167,7 +167,7 @@ function DirectoryHome({ primaryTask, listingPosts, classifiedPosts }: {
             <div className="lg:col-span-7">
               <h1 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
                 Listings built for comparison, not decoration.{' '}
-                <span className="block text-[#AAFFC7]/95">Insights when buyers need more than a card.</span>
+                <span className="block text-[#AAFFC7]/95">Clear details when buyers need more than a card.</span>
               </h1>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">{SITE_CONFIG.description}</p>
               <div className="mt-9 flex flex-wrap gap-3">
@@ -208,8 +208,8 @@ function DirectoryHome({ primaryTask, listingPosts, classifiedPosts }: {
                     ],
                     [
                       '03',
-                      'Longer reads when needed',
-                      'The insights library carries procurement notes, checklists, and sector context for people who already picked two finalists.',
+                      'Details where they matter',
+                      'Every listing keeps core details, highlights, and contact paths in one place so buyers can decide faster.',
                     ],
                   ].map(([num, title, desc]) => (
                     <li key={num} className="flex gap-5">
@@ -317,7 +317,7 @@ function EditorialHome({ primaryTask, articlePosts, supportTasks }: { primaryTas
             </h1>
             <p className={`mt-6 max-w-2xl text-base leading-8 ${tone.muted}`}>{SITE_CONFIG.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={primaryTask?.route || '/articles'} className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
+              <Link href={primaryTask?.route || '/listings'} className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
                 Start reading
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -331,7 +331,7 @@ function EditorialHome({ primaryTask, articlePosts, supportTasks }: { primaryTas
             <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Inside this issue</p>
             <div className="mt-5 space-y-5">
               {side.map((post) => (
-                <Link key={post.id} href={`/articles/${post.slug}`} className="block border-b border-black/10 pb-5 last:border-b-0 last:pb-0">
+                <Link key={post.id} href={getTaskHref(resolveTaskKey(readPostTask(post), 'listing'), post.slug)} className="block border-b border-black/10 pb-5 last:border-b-0 last:pb-0">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] opacity-60">Feature</p>
                   <h3 className="mt-2 text-xl font-semibold">{post.title}</h3>
                   <p className={`mt-2 text-sm leading-7 ${tone.muted}`}>{post.summary || 'Long-form perspective with a calmer reading rhythm.'}</p>
@@ -351,8 +351,8 @@ function EditorialHome({ primaryTask, articlePosts, supportTasks }: { primaryTas
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Lead story</p>
                 <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em]">{lead.title}</h2>
                 <p className={`mt-4 text-sm leading-8 ${tone.muted}`}>{lead.summary || 'A more deliberate lead story surface with room for a proper narrative setup.'}</p>
-                <Link href={`/articles/${lead.slug}`} className={`mt-8 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
-                  Read article
+                <Link href={getTaskHref(resolveTaskKey(readPostTask(lead), 'listing'), lead.slug)} className={`mt-8 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
+                  View details
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

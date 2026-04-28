@@ -22,7 +22,7 @@ export const siteTaskDefinitions = [
     route: '/articles',
     description: 'Guides, interviews, and checklists for buyers and operators who already narrowed their shortlist.',
     contentType: 'article',
-    enabled: true,
+    enabled: false,
   },
   {
     key: 'image',

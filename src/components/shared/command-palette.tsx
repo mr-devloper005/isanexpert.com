@@ -8,7 +8,6 @@ import { FileText, Plus, Tag, Bookmark, Settings, Search } from 'lucide-react'
 
 const quickLinks = [
   { label: 'Go to Social Bookmarks', href: '/sbm', icon: Bookmark },
-  { label: 'Go to Articles', href: '/articles', icon: FileText },
   { label: 'Go to Listings', href: '/listings', icon: Tag },
   { label: 'Go to Settings', href: '/settings', icon: Settings },
 ]

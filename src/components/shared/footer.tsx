@@ -27,7 +27,10 @@ const buildTaskLink = (task: (typeof SITE_CONFIG.tasks)[number]) => ({
 
 const footerLinks = {
   platform: SITE_CONFIG.tasks.filter((task) => task.enabled).map(buildTaskLink),
-  company: [{ name: 'About', href: '/about' }],
+  company: [{ name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+  ],
+
   resources: [
     { name: 'Help Center', href: '/help' },
     { name: 'Community', href: '/community' },
