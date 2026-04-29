@@ -10,11 +10,11 @@ import { LoginForm } from '@/app/login/login-form'
 function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
   if (kind === 'directory') {
     return {
-      shell: 'bg-[#f8fbff] text-slate-950',
-      panel: 'border border-slate-200 bg-white',
-      side: 'border border-slate-200 bg-slate-50',
-      muted: 'text-slate-600',
-      action: 'bg-slate-950 text-white hover:bg-slate-800',
+      shell: 'bg-[#f4fff8] text-[#124170]',
+      panel: 'border border-[#124170]/12 bg-white shadow-[0_24px_60px_rgba(18,65,112,0.08)]',
+      side: 'border border-[#67C090]/22 bg-[#f6fffb]',
+      muted: 'text-[#215B63]/85',
+      action: 'bg-[#124170] text-white hover:bg-[#0f3558]',
       icon: Building2,
       title: 'Access your business dashboard',
       body: 'Manage listings, verification details, contact info, and local discovery surfaces from one place.',

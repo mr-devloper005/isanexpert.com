@@ -57,7 +57,7 @@ export function NoArticlesFound() {
       icon={FileText}
       title="No articles found"
       description="We couldn't find any articles matching your criteria. Try adjusting your filters or search terms."
-      action={{ label: 'Browse All Articles', href: '/articles' }}
+      action={{ label: 'Browse All Listings', href: '/listings' }}
     />
   )
 }
