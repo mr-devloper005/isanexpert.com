@@ -79,7 +79,7 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
     post.summary ||
     "Profile details will appear here once available.";
   const descriptionHtml = formatRichHtml(description);
-  const suggestedArticles = await fetchTaskPosts("article", 6);
+  const suggestedListings = await fetchTaskPosts("listing", 6);
   const baseUrl = SITE_CONFIG.baseUrl.replace(/\/$/, "");
   const breadcrumbData = {
     "@context": "https://schema.org",
@@ -146,20 +146,20 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
           </div>
         </section>
 
-        {suggestedArticles.length ? (
+        {suggestedListings.length ? (
           <section className="mt-12">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-foreground">Suggested articles</h2>
-              <Link href="/articles" className="text-sm font-medium text-primary hover:underline">
+              <h2 className="text-xl font-semibold text-foreground">Suggested listings</h2>
+              <Link href="/listings" className="text-sm font-medium text-primary hover:underline">
                 View all
               </Link>
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {suggestedArticles.slice(0, 3).map((article) => (
+              {suggestedListings.slice(0, 3).map((listing) => (
                 <TaskPostCard
-                  key={article.id}
-                  post={article}
-                  href={buildPostUrl("article", article.slug)}
+                  key={listing.id}
+                  post={listing}
+                  href={buildPostUrl("listing", listing.slug)}
                   compact
                 />
               ))}
@@ -167,13 +167,13 @@ export default async function ProfileDetailPage({ params }: { params: Promise<{ 
             <nav className="mt-6 rounded-2xl border border-border bg-card/60 p-4">
               <p className="text-sm font-semibold text-foreground">Related links</p>
               <ul className="mt-2 space-y-2 text-sm">
-                {suggestedArticles.slice(0, 3).map((article) => (
-                  <li key={`related-${article.id}`}>
+                {suggestedListings.slice(0, 3).map((listing) => (
+                  <li key={`related-${listing.id}`}>
                     <Link
-                      href={buildPostUrl("article", article.slug)}
+                      href={buildPostUrl("listing", listing.slug)}
                       className="text-primary underline-offset-4 hover:underline"
                     >
-                      {article.title}
+                      {listing.title}
                     </Link>
                   </li>
                 ))}

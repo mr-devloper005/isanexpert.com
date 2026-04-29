@@ -11,7 +11,7 @@ export const siteContent = {
     badge: 'Business directory',
     title: ['Listings visitors can compare in minutes.', 'Context when they want to read longer.'],
     description:
-      'Isanexpert combines a structured business directory with editorial insights. Operators keep categories, locations, and contact paths consistent; readers move from a shortlist of listings into guides and explainers without losing their place.',
+      'Isanexpert combines a structured business directory with clear publishing surfaces. Operators keep categories, locations, and contact paths consistent; readers move from a shortlist of listings to contact without losing their place.',
     primaryCta: {
       label: 'Create a listing',
       href: '/dashboard/listings/new',
@@ -29,33 +29,33 @@ export const siteContent = {
   },
   home: {
     metadata: {
-      title: 'Isanexpert — business listings and market insights',
+      title: 'Isanexpert — business listings',
       description:
-        'Browse verified-style business listings across categories, read practical guides in the insights section, and move from search to contact with fewer dead ends. Built for teams that care how their brand reads online.',
-      openGraphTitle: 'Isanexpert — business listings and market insights',
+        'Browse verified-style business listings across categories,  move from search to contact with fewer dead ends. Built for teams that care how their brand reads online.',
+      openGraphTitle: 'Isanexpert — business listings',
       openGraphDescription:
-        'A directory-first experience with editorial support: compare services by location and category, then dig into longer articles when you need procurement notes, compliance reminders, or marketing context.',
+        'A directory-first experience: compare services by location and category with consistent listing structure and contact paths.',
       keywords: [
         'Isanexpert',
         'business directory',
         'company listings',
         'local services directory',
         'B2B listings',
-        'market insights',
-        'business guides',
+        'business profiles',
+        'service discovery',
       ],
     },
     introBadge: 'What we are building',
     introTitle: 'A directory that respects how people actually decide.',
     introParagraphs: [
       'Most people do not read a homepage like a brochure. They scan for category, geography, and proof that a business is legitimate, then open one or two listings to compare hours, scope, and contact options.',
-      'Isanexpert keeps that scanning rhythm honest: listings use consistent fields so you are not comparing apples with vague paragraphs. When someone needs more than a card can hold, the insights library carries interviews, checklists, and sector notes written in plain language.',
+      'Isanexpert keeps that scanning rhythm honest: listings use consistent fields so you are not comparing apples with vague paragraphs. When someone needs more than a card can hold, the detail page carries highlights, media, and contact-ready context in plain language.',
       'Whether you run a clinic, a studio, a consultancy, or a regional chain, the goal is the same—publish information once, keep it easy to update, and let visitors trust what they see.',
     ],
     sideBadge: 'What visitors notice first',
     sidePoints: [
       'Readable typography and spacing so dense categories do not feel like a spreadsheet.',
-      'Strong contrast between directory pages and long-form articles so each format does its job.',
+      'Strong contrast between list pages and detail pages so each format does its job.',
       'Mobile layouts that keep phone numbers, addresses, and primary actions within thumb reach.',
       'Search and filters that stay predictable as you add more listings over time.',
     ],
@@ -64,8 +64,8 @@ export const siteContent = {
       href: '/listings',
     },
     secondaryLink: {
-      label: 'Read insights',
-      href: '/articles',
+      label: 'Browse listings',
+      href: '/listings',
     },
   },
   cta: {
@@ -156,7 +156,7 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'Profiles', href: '/profile' },
     ],
   },
@@ -168,7 +168,7 @@ export const taskIntroCopy: Record<
       'When you publish, add alt text and captions where you can—they help accessibility and search without changing how the grid behaves.',
     ],
     links: [
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'Classifieds', href: '/classifieds' },
     ],
@@ -182,7 +182,7 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'Images', href: '/images' },
     ],
   },
@@ -194,7 +194,7 @@ export const taskIntroCopy: Record<
       'Collections can sit next to articles and listings in your workflow—you are not forced into a single content type for every reference.',
     ],
     links: [
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'PDFs', href: '/pdf' },
     ],
@@ -207,7 +207,7 @@ export const taskIntroCopy: Record<
       'When a document updates, replace the file and note the revision date in the summary line so repeat buyers know they have the current version.',
     ],
     links: [
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'Profiles', href: '/profile' },
     ],
@@ -221,7 +221,7 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'PDFs', href: '/pdf' },
     ],
   },
@@ -233,7 +233,7 @@ export const taskIntroCopy: Record<
       'Authors receive notifications when new comments arrive so answers land while the article is still relevant.',
     ],
     links: [
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'Classifieds', href: '/classifieds' },
     ],
@@ -247,8 +247,9 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Insights', href: '/articles' },
+      { label: 'Listings', href: '/listings' },
       { label: 'PDF library', href: '/pdf' },
     ],
   },
 }
+
