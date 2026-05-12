@@ -156,7 +156,6 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Listings', href: '/listings' },
       { label: 'Profiles', href: '/profile' },
     ],
   },
@@ -168,7 +167,6 @@ export const taskIntroCopy: Record<
       'When you publish, add alt text and captions where you can—they help accessibility and search without changing how the grid behaves.',
     ],
     links: [
-      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'Classifieds', href: '/classifieds' },
     ],
@@ -182,7 +180,6 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Listings', href: '/listings' },
       { label: 'Images', href: '/images' },
     ],
   },
@@ -194,7 +191,6 @@ export const taskIntroCopy: Record<
       'Collections can sit next to articles and listings in your workflow—you are not forced into a single content type for every reference.',
     ],
     links: [
-      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'PDFs', href: '/pdf' },
     ],
@@ -208,7 +204,6 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Listings', href: '/listings' },
       { label: 'Profiles', href: '/profile' },
     ],
   },
@@ -221,8 +216,6 @@ export const taskIntroCopy: Record<
     ],
     links: [
       { label: 'Listings', href: '/listings' },
-      { label: 'Listings', href: '/listings' },
-      { label: 'PDFs', href: '/pdf' },
     ],
   },
   comment: {
@@ -233,7 +226,6 @@ export const taskIntroCopy: Record<
       'Authors receive notifications when new comments arrive so answers land while the article is still relevant.',
     ],
     links: [
-      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'Classifieds', href: '/classifieds' },
     ],
@@ -246,7 +238,6 @@ export const taskIntroCopy: Record<
       'Link organisation pages from listings and profiles so visitors always see the same corporate narrative.',
     ],
     links: [
-      { label: 'Listings', href: '/listings' },
       { label: 'Listings', href: '/listings' },
       { label: 'PDF library', href: '/pdf' },
     ],

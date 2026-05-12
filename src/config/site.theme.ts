@@ -9,7 +9,7 @@ export const SITE_THEME = defineSiteTheme({
   home: {
     layout: 'directory-stack',
     primaryTask: 'listing',
-    featuredTaskKeys: ['listing', 'article'],
+    featuredTaskKeys: ['listing'],
   },
   navigation: {
     variant: 'compact',

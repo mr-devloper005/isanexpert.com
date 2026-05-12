@@ -34,13 +34,6 @@ export function DirectoryTaskDetailPage({
   const phone = typeof content.phone === 'string' ? content.phone : ''
   const email = typeof content.email === 'string' ? content.email : ''
   const highlights = Array.isArray(content.highlights) ? content.highlights.filter((item): item is string => typeof item === 'string') : []
-  const postedDate = post.publishedAt
-    ? new Date(post.publishedAt).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-    : null
   const descriptionHtml = formatRichHtml(description, 'Details coming soon.')
 
   const schemaPayload = {
@@ -74,10 +67,9 @@ export function DirectoryTaskDetailPage({
             </div>
             <div>
               <h1 className="text-4xl font-semibold tracking-tight text-[#1f3855]">{post.title}</h1>
-              {(post.authorName || postedDate) ? (
+              {post.authorName ? (
                 <p className="mt-4 text-sm text-[#6b86a4]">
-                  Posted by {post.authorName || post.title}
-                  {postedDate ? ` ${postedDate}` : ''}
+                  Posted by {post.authorName}
                 </p>
               ) : null}
               <div className="mt-4 border-t border-[#d8e2ef] pt-4">

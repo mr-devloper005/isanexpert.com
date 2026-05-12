@@ -102,15 +102,7 @@ export default function ContactPage() {
 
           <div className={`rounded-[2rem] p-7 ${tone.panel}`}>
             <h2 className="text-2xl font-semibold text-[#124170]">Send a message</h2>
-            <div className="mt-4">
-              <a
-                href={`mailto:${contactEmail}`}
-                className={`inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold ${tone.action}`}
-              >
-                Email us at {contactEmail}
-              </a>
-            </div>
-            <form className="mt-6 grid gap-4">
+            <form className="mt-4 grid gap-4">
               <input className="h-12 rounded-xl border border-[#124170]/12 bg-white px-4 text-sm text-[#124170] placeholder:text-[#124170]/45" placeholder="Your name" />
               <input className="h-12 rounded-xl border border-[#124170]/12 bg-white px-4 text-sm text-[#124170] placeholder:text-[#124170]/45" placeholder="Email address" />
               <input className="h-12 rounded-xl border border-[#124170]/12 bg-white px-4 text-sm text-[#124170] placeholder:text-[#124170]/45" placeholder="What do you need help with?" />
